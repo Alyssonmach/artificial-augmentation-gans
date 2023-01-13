@@ -128,4 +128,4 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-course-2\week-1\inception_v3_google-1a9a5a14.pth
+course-2/week-1/inception_v3_google-1a9a5a14.pth
