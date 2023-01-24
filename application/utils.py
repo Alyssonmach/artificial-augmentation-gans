@@ -7,7 +7,8 @@ import numpy as np
 import torch
 import math
 
-def show_tensor_images(image_tensor, num_images = 25, nrow = 5, image_name = 'images/tensor_images.png'):
+def show_tensor_images(image_tensor, num_images = 25, nrow = 5, 
+                       image_name = 'application/images/tensor_images.png'):
     '''
     Function for visualizing images: Given a tensor of images, number of images, and
     size per image, plots and prints the images in an uniform grid.
@@ -46,8 +47,8 @@ def create_gif(images_pytorch_tensor):
         convert_image = Image.fromarray(np.uint8(images_pytorch_tensor[index, 0, :, :].detach().numpy()*255))
         images_numpy.append(convert_image)
     
-    images_numpy[0].save('images/tensor_images.gif', save_all = True, append_images = images_numpy, 
-                         duration = 50, loop = 0)
+    images_numpy[0].save('application/images/tensor_images.gif', save_all = True, 
+                         append_images = images_numpy, duration = 50, loop = 0)
 
 def get_noise(n_samples, input_dim, device = 'cpu'):
     '''
@@ -174,7 +175,7 @@ def interpolate_noise(first_noise, second_noise, n_interpolation, interpolation_
     noise_and_labels = combine_vectors(interpolation_noise, interpolation_label.to(device))
     fake = gen(noise_and_labels)
     show_tensor_images(fake, num_images=n_interpolation, nrow=int(math.sqrt(n_interpolation)), 
-                       image_name = f'images/{n_noise}-generated.png')
+                       image_name = f'application/images/{n_noise}-generated.png')
 
 def interpolate_noise_gif(n_noise, z_dim, n_interpolation, interpolation_label, gen, device):
     
@@ -184,7 +185,7 @@ def interpolate_noise_gif(n_noise, z_dim, n_interpolation, interpolation_label, 
         for j, second_plot_noise in enumerate(plot_noises):
             interpolate_noise(first_plot_noise, second_plot_noise, n_interpolation, interpolation_label, 
                               n_noise, gen, device)
-            images_numpy.append(Image.open(f'images/{n_noise}-generated.png').convert("RGB"))
+            images_numpy.append(Image.open(f'application/images/{n_noise}-generated.png').convert("RGB"))
 
-    images_numpy[0].save('images/interpolate-noise.gif', save_all = True, append_images = images_numpy, 
-                         duration = 100, loop = 0)
+    images_numpy[0].save('application/images/interpolate-noise.gif', save_all = True, 
+                         append_images = images_numpy, duration = 100, loop = 0)
