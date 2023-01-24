@@ -50,7 +50,7 @@ if data_box == 'MNIST' and algorithm_box == 'DCGAN':
 
     generator_input_dim, discriminator_im_chan = utils.get_input_dimensions(z_dim, mnist_shape, n_classes)
     gen = utils.Generator(input_dim = generator_input_dim).to(device)
-    gen.load_state_dict(torch.load('models/gen_conditional_dcgan.pth', 
+    gen.load_state_dict(torch.load('application/models/gen_conditional_dcgan.pth', 
                         map_location = torch.device(device)))
     gen.eval()
 
