@@ -367,6 +367,71 @@ class GeneratorWGANGP_V1_0(nn.Module):
         x = noise.view(len(noise), self.z_dim, 1, 1)
         
         return self.gen(x)
+class GeneratorWGANGP_V2_0(nn.Module):
+    '''
+    Generator Class
+    Values:
+        input_dim: the dimension of the input vector, a scalar
+        im_chan: the number of channels in the images, fitted for the dataset used, a scalar
+        hidden_dim: the inner dimension, a scalar
+    '''
+    
+    def __init__(self, input_dim = 10, im_chan = 3, hidden_dim = 64):
+        super(GeneratorWGANGP_V2_0, self).__init__()
+        
+        self.input_dim = input_dim
+        
+        self.gen = nn.Sequential(
+            self.make_gen_block(input_channels = input_dim, output_channels = hidden_dim * 8, 
+                                kernel_size = 4, stride = 1, padding = 0, bias = False),
+            self.make_gen_block(input_channels = hidden_dim * 8, output_channels = hidden_dim * 4, 
+                                kernel_size = 4, stride = 2, padding = 1, bias = False),
+            self.make_gen_block(input_channels = hidden_dim * 4, output_channels = hidden_dim * 2,
+                                kernel_size = 4, stride = 2, padding = 1, bias = False),
+            self.make_gen_block(input_channels = hidden_dim * 2, output_channels = hidden_dim,
+                                kernel_size = 4, stride = 2, padding = 1, bias = False),
+            self.make_gen_block(input_channels = hidden_dim, output_channels = im_chan, 
+                                kernel_size = 4, stride = 2, padding = 1, bias = False, 
+                                final_layer = True))
+
+    def make_gen_block(self, input_channels, output_channels, kernel_size = 3, stride = 2, 
+                       padding = 1, bias = False, final_layer = False):
+        '''
+        Function to return a sequence of operations corresponding to a generator block of DCGAN;
+        a transposed convolution, a batchnorm (except in the final layer), and an activation.
+        Parameters:
+            input_channels: how many channels the input feature representation has
+            output_channels: how many channels the output feature representation should have
+            kernel_size: the size of each convolutional filter, equivalent to (kernel_size, kernel_size)
+            stride: the stride of the convolution
+            final_layer: a boolean, true if it is the final layer and false otherwise 
+                         (affects activation and batchnorm)
+        '''
+        
+        if not final_layer:
+            return nn.Sequential(
+                nn.ConvTranspose2d(in_channels = input_channels, out_channels = output_channels, 
+                                   kernel_size = kernel_size, stride = stride, padding = padding,
+                                   bias = bias),
+                nn.BatchNorm2d(num_features = output_channels),
+                nn.ReLU(inplace = True))
+        else:
+            return nn.Sequential(
+                nn.ConvTranspose2d(in_channels = input_channels, out_channels = output_channels,
+                                   kernel_size = kernel_size, stride = stride, padding = padding,
+                                   bias = bias),
+                nn.Tanh())
+
+    def forward(self, noise):
+        '''
+        Function for completing a forward pass of the generator: Given a noise tensor, 
+        returns generated images.
+        Parameters:
+            noise: a noise tensor with dimensions (n_samples, input_dim)
+        '''
+        
+        x = noise.view(len(noise), self.input_dim, 1, 1)
+        return self.gen(x)
 
 class GeneratorSNGANWGANGP_V1_0(nn.Module):
     '''
@@ -432,4 +497,70 @@ class GeneratorSNGANWGANGP_V1_0(nn.Module):
         
         x = noise.view(len(noise), self.z_dim, 1, 1)
         
+        return self.gen(x)
+
+class GeneratorSNGANWGANGP_V2_0(nn.Module):
+    '''
+    Generator Class
+    Values:
+        input_dim: the dimension of the input vector, a scalar
+        im_chan: the number of channels in the images, fitted for the dataset used, a scalar
+        hidden_dim: the inner dimension, a scalar
+    '''
+    
+    def __init__(self, input_dim = 10, im_chan = 3, hidden_dim = 64):
+        super(GeneratorSNGANWGANGP_V2_0, self).__init__()
+        
+        self.input_dim = input_dim
+        
+        self.gen = nn.Sequential(
+            self.make_gen_block(input_channels = input_dim, output_channels = hidden_dim * 8, 
+                                kernel_size = 4, stride = 1, padding = 0, bias = False),
+            self.make_gen_block(input_channels = hidden_dim * 8, output_channels = hidden_dim * 4, 
+                                kernel_size = 4, stride = 2, padding = 1, bias = False),
+            self.make_gen_block(input_channels = hidden_dim * 4, output_channels = hidden_dim * 2,
+                                kernel_size = 4, stride = 2, padding = 1, bias = False),
+            self.make_gen_block(input_channels = hidden_dim * 2, output_channels = hidden_dim,
+                                kernel_size = 4, stride = 2, padding = 1, bias = False),
+            self.make_gen_block(input_channels = hidden_dim, output_channels = im_chan, 
+                                kernel_size = 4, stride = 2, padding = 1, bias = False, 
+                                final_layer = True))
+
+    def make_gen_block(self, input_channels, output_channels, kernel_size = 3, stride = 2, 
+                       padding = 1, bias = False, final_layer = False):
+        '''
+        Function to return a sequence of operations corresponding to a generator block of DCGAN;
+        a transposed convolution, a batchnorm (except in the final layer), and an activation.
+        Parameters:
+            input_channels: how many channels the input feature representation has
+            output_channels: how many channels the output feature representation should have
+            kernel_size: the size of each convolutional filter, equivalent to (kernel_size, kernel_size)
+            stride: the stride of the convolution
+            final_layer: a boolean, true if it is the final layer and false otherwise 
+                         (affects activation and batchnorm)
+        '''
+        
+        if not final_layer:
+            return nn.Sequential(
+                nn.ConvTranspose2d(in_channels = input_channels, out_channels = output_channels, 
+                                   kernel_size = kernel_size, stride = stride, padding = padding,
+                                   bias = bias),
+                nn.BatchNorm2d(num_features = output_channels),
+                nn.ReLU(inplace = True))
+        else:
+            return nn.Sequential(
+                nn.ConvTranspose2d(in_channels = input_channels, out_channels = output_channels,
+                                   kernel_size = kernel_size, stride = stride, padding = padding,
+                                   bias = bias),
+                nn.Tanh())
+
+    def forward(self, noise):
+        '''
+        Function for completing a forward pass of the generator: Given a noise tensor, 
+        returns generated images.
+        Parameters:
+            noise: a noise tensor with dimensions (n_samples, input_dim)
+        '''
+        
+        x = noise.view(len(noise), self.input_dim, 1, 1)
         return self.gen(x)
