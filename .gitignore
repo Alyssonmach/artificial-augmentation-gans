@@ -130,13 +130,9 @@ dmypy.json
 
 # not tracking very heavy data files
 data-augmentation-experiments/mnist-dataset/MNIST/
-!data-augmentation-experiments/mnist-dataset/MNIST/README.md
 
 data-augmentation-experiments/fashion-mnist-dataset/FashionMNIST/
-!data-augmentation-experiments/fashion-mnist-dataset/FashionMNIST/README.md
 
 data-augmentation-experiments/emnist-letters-dataset/EMNIST/
-!data-augmentation-experiments/emnist-letters-dataset/EMNIST/README.md
 
 data-augmentation-experiments/celeba-dataset/celeba/
-!data-augmentation-experiments/celeba-dataset/celeba/README.md
