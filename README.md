@@ -26,7 +26,7 @@ During training, the two networks work together to improve the generator's abili
 author = {Machado, Alysson and Veloso, Luciana and Araújo, Leo},
 month = sep,
 title = {{Geração de Imagens Artificiais para Aumento de Dados Utilizando Redes Adversárias Generativas}},
-url = {https://github.com/Alyssonmach/pibic-2022-2023},
+url = {https://github.com/Alyssonmach/artificial-augmentation-gans},
 version = {1.0.0},
 year = {2023}
 }
