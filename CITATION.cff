@@ -3,9 +3,10 @@ message: "If you use this software, please cite it as below."
 authors:
 - family-names: "Machado"
   given-names: "Alysson"
-  orcid: "https://orcid.org/0000-0003-3025-9382"
 - family-names: "Veloso"
   given-names: "Luciana"
+- family-names: "Araújo"
+  given-names: "Leo"
 title: "Geração de Imagens Artificiais para Aumento de Dados Utilizando Redes Adversárias Generativas"
 version: 1.0.0
 date-released: 2023-09-09
