@@ -12,8 +12,7 @@ During training, the two networks work together to improve the generator's abili
 
 ### Project Reports
 
-* [Partial report UFCG](papers/relatorio-parcial.pdf)
-* [Final report UFCG]()
+* [Project execution report UFCG]()
 
 ### Results
 
