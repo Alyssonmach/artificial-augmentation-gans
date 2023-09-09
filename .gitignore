@@ -128,6 +128,7 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
+# not tracking very heavy data files
 data-augmentation-experiments/mnist-dataset/MNIST/
 !data-augmentation-experiments/mnist-dataset/MNIST/README.md
 
