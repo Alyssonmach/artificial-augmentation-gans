@@ -10,10 +10,6 @@ Generative adversarial networks are composed of two neural networks trained toge
 
 During training, the two networks work together to improve the generator's ability to create images that look real and to improve the discriminator's ability to identify generated images. This allows the generator to create new images that are very similar to the real images.
 
-### Project Reports
-
-* [Project execution report UFCG]()
-
 ### Results
 
 * [Data Augmentation Test Results](data-augmentation-experiments/planilha-resultados.pdf)
